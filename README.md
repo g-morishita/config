@@ -16,11 +16,7 @@ This repo currently manages:
 - `nvim` `0.11+`
 - a Nerd Font in your terminal
 
-For full Neovim LSP support, make sure these executables are on `PATH` because they are enabled in [nvim/lua/config/lsp.lua](nvim/lua/config/lsp.lua):
-
-- `lua-language-server`
-- `basedpyright-langserver`
-- `stan-language-server`
+Neovim installs its configured language servers and development tools through Mason on first launch. The focused setup supports Python, R, Markdown, LaTeX, Lua, shell, JSON, JavaScript/TypeScript, Docker, HTML, and CSS.
 
 ## Install
 
@@ -53,6 +49,27 @@ The iTerm2 profile is a [dynamic profile](https://iterm2.com/documentation-dynam
 - compact Git and navigation aliases
 
 The aliases and optional tool initialization are guarded, so the shell still starts if an optional package is unavailable.
+
+## Neovim
+
+The Neovim setup includes:
+
+- Tokyo Night with a status line, icons, indentation guides, smooth scrolling, and cursor animation
+- Neo-tree as the single sidebar file explorer (`<leader>e`)
+- Snacks for file search (`<leader><space>`), text search (`<leader>/`), buffers (`<leader>,`), and Git views
+- completion, diagnostics, formatting, linting, Git signs, comments, and automatic bracket pairs
+- rendered Markdown, a CSV table viewer, CSS color previews, and HTML tag completion
+- VimTeX with Skim for LaTeX PDF viewing
+
+Mason installs only the language tools used by this setup. R uses `languageserver` for code intelligence and Air for formatting; Python uses BasedPyright and Ruff.
+
+VimTeX expects a TeX distribution that provides `latexmk`. Install one separately if it is not already available:
+
+```bash
+brew install --cask mactex-no-gui
+```
+
+The Brewfile installs Skim as the PDF viewer. In a LaTeX buffer, use `\ll` to compile and `\lv` to open the PDF.
 
 ## Verify
 

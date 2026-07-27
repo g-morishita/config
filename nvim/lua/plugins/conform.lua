@@ -22,21 +22,14 @@ return {
 				lua = { "stylua" },
 
 				-- Python
-				python = { "isort", "black" },
+				python = { "ruff_format" },
 
-				-- Go
-				go = { "gofmt", "goimports" },
-
-				-- Rust
-				rust = { "rustfmt" },
+				-- R
+				r = { "air" },
 
 				-- Shell
 				sh = { "shfmt" },
 				bash = { "shfmt" },
-				zsh = { "shfmt" },
-
-				-- TOML
-				toml = { "taplo" },
 
 				-- Use the "*" filetype to run formatters on all filetypes
 				["*"] = { "trim_whitespace" },

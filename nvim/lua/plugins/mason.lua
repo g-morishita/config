@@ -3,47 +3,40 @@ return {
 	dependencies = {
 		"WhoIsSethDaniel/mason-tool-installer.nvim",
 		"mason-org/mason-lspconfig.nvim",
+		"neovim/nvim-lspconfig",
 	},
 	config = function()
-		-- Enable mason
 		require("mason").setup({
 			ui = {
 				border = "rounded",
 			},
 		})
 
-		-- require("mason-lspconfig").setup()
+		require("mason-lspconfig").setup({
+			automatic_enable = false,
+		})
 
-		-- Install formatters, and linters
 		require("mason-tool-installer").setup({
 			ensure_installed = {
-				"ts_ls",
-				"lua_ls",
-				"tailwindcss",
-				"eslint",
-				"rust_analyzer",
-				"gopls",
-				"html",
-				"cssls",
+				"air",
 				"basedpyright",
 				"bashls",
-				"css_variables",
-				"cssmodules_ls",
+				"cssls",
+				"docker_compose_language_service",
 				"dockerls",
+				"eslint",
+				"html",
 				"jsonls",
-				"lemminx",
+				"lua_ls",
 				"marksman",
-				"nginx_language_server",
-				"taplo",
-				"yamlls",
-
-				"prettier", -- JavaScript/TypeScript formatter
-				"stylua", -- Lua formatter
-				"black", -- Python formatter
-				"isort", -- Python import organizer
-				"pylint", -- Python linter
-				"shellcheck", -- Shell script linter
-				"shfmt", -- Shell script formatter
+				"prettier",
+				"r_language_server",
+				"ruff",
+				"shellcheck",
+				"shfmt",
+				"stylua",
+				"texlab",
+				"ts_ls",
 			},
 		})
 	end,

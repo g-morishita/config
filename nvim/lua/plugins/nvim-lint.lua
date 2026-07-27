@@ -6,6 +6,7 @@ return {
 
 		-- Configure linters by filetype
 		lint.linters_by_ft = {
+			python = { "ruff" },
 			-- javascript = { "eslint_d" },
 			-- typescript = { "eslint_d" },
 			-- javascriptreact = { "eslint_d" },
@@ -21,7 +22,6 @@ return {
 			-- lua = { "luacheck" },
 			sh = { "shellcheck" },
 			bash = { "shellcheck" },
-			zsh = { "shellcheck" },
 		}
 
 		-- Create autocommand to trigger linting

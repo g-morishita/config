@@ -25,11 +25,6 @@ return {
 			css = true, -- Enable all CSS *features*:
 			-- names, RGB, RGBA, RRGGBB, RRGGBBAA, AARRGGBB, rgb_fn, hsl_fn
 			css_fn = true, -- Enable all CSS *functions*: rgb_fn, hsl_fn
-			-- Tailwind colors.  boolean|'normal'|'lsp'|'both'.  True sets to 'normal'
-			tailwind = true, -- Enable tailwind colors
-			tailwind_opts = { -- Options for highlighting tailwind names
-				update_names = false, -- When using tailwind = 'both', update tailwind names from LSP results.  See tailwind section
-			},
 		},
 	},
 }
