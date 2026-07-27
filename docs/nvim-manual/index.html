@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Manual for Gota Morishita's Neovim configuration">
+    <title>Neovim Manual · Overview</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <header>
+      <div class="topbar">
+        <a class="brand" href="index.html">Neovim Manual</a>
+        <nav aria-label="Manual">
+          <a href="index.html" aria-current="page">Overview</a>
+          <a href="keybindings.html">Keybindings</a>
+          <a href="languages.html">Languages</a>
+          <a href="troubleshooting.html">Troubleshooting</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="eyebrow">Current configuration</div>
+        <h1>A focused, animated Neovim.</h1>
+        <p class="lede">
+          This manual describes the configuration in this repository: no AI
+          tools, one file sidebar, a clean Tokyo Night interface, and language
+          tooling selected for everyday research and development.
+        </p>
+      </section>
+
+      <section class="grid" aria-label="Configuration highlights">
+        <article class="card">
+          <h3>Navigate</h3>
+          <p>Neo-tree provides the sidebar. Snacks handles files, text, buffers, recent files, and Git search.</p>
+        </article>
+        <article class="card">
+          <h3>Write</h3>
+          <p>Blink provides completion. Conform formats on request, while nvim-lint reports Python and shell problems.</p>
+        </article>
+        <article class="card">
+          <h3>Read</h3>
+          <p>Markview renders Markdown, CSVView aligns tabular data, and VimTeX compiles LaTeX into PDFs with Skim.</p>
+        </article>
+        <article class="card">
+          <h3>See context</h3>
+          <p>Tokyo Night, Lualine, Git signs, indentation guides, diagnostics, smooth scrolling, and cursor animation stay visible but restrained.</p>
+        </article>
+      </section>
+
+      <h2 id="install">Install</h2>
+      <p>Clone the repository and let the installer link the configuration and install its Homebrew dependencies:</p>
+      <pre><code>git clone git@github.com:g-morishita/config.git ~/config
+cd ~/config
+./scripts/install.sh --packages</code></pre>
+      <p>If the Homebrew packages are already present, omit <code>--packages</code>.</p>
+
+      <div class="note">
+        <p>
+          The installer moves an existing <code>~/.config/nvim</code> to a
+          timestamped backup before creating the symlink. It does not silently
+          delete the previous configuration.
+        </p>
+      </div>
+
+      <h2 id="first-start">First start</h2>
+      <ol>
+        <li>Run <code>nvim</code>.</li>
+        <li>Lazy downloads the configured plugins.</li>
+        <li>Mason downloads the configured language servers and command-line tools.</li>
+        <li>Wait until installation is quiet, close Neovim, and open it again.</li>
+        <li>Run <code>:checkhealth</code> if any warning remains.</li>
+      </ol>
+
+      <p>Useful management screens:</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Command</th><th>Purpose</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><code>:Lazy</code></td><td>Inspect, update, or clean Neovim plugins.</td></tr>
+            <tr><td><code>:Mason</code></td><td>Inspect language servers, formatters, and linters.</td></tr>
+            <tr><td><code>:checkhealth</code></td><td>Run Neovim and plugin diagnostics.</td></tr>
+            <tr><td><code>:LspInfo</code></td><td>See which language server is attached to the current buffer.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2 id="daily">Daily workflow</h2>
+      <ol>
+        <li>Open a project with <code>nvim .</code>.</li>
+        <li>Press <kbd>Space</kbd> <kbd>e</kbd> for the Neo-tree sidebar.</li>
+        <li>Press <kbd>Space</kbd> <kbd>Space</kbd> to find a file or <kbd>Space</kbd> <kbd>/</kbd> to search its contents.</li>
+        <li>Use <kbd>gd</kbd>, <kbd>gr</kbd>, and <kbd>K</kbd> to explore code through the language server.</li>
+        <li>Use <kbd>Space</kbd> <kbd>l</kbd> <kbd>f</kbd> to format and <kbd>Space</kbd> <kbd>l</kbd> <kbd>l</kbd> to lint.</li>
+      </ol>
+
+      <h2 id="features">What is installed</h2>
+      <div class="grid">
+        <article class="card">
+          <h3>Interface</h3>
+          <p>Tokyo Night, Lualine, web-devicons, Snacks indent, Which-key, Neoscroll, and Smear Cursor.</p>
+        </article>
+        <article class="card">
+          <h3>Editing</h3>
+          <p>Blink completion, auto-pairs, Comment.nvim, Treesitter, HTML autotag, and persistent undo.</p>
+        </article>
+        <article class="card">
+          <h3>Code intelligence</h3>
+          <p>Native Neovim LSP, Mason, BasedPyright, Ruff, Air, TypeScript, ESLint, and the other tools listed in the language matrix.</p>
+        </article>
+        <article class="card">
+          <h3>Special formats</h3>
+          <p>Markview for Markdown, VimTeX and Skim for LaTeX, CSVView for data, and Colorizer for CSS colors.</p>
+        </article>
+      </div>
+
+      <h2 id="behavior">Editor behavior</h2>
+      <ul>
+        <li>The leader and local leader are both <kbd>Space</kbd>.</li>
+        <li>Line numbers are absolute on the current line and relative elsewhere.</li>
+        <li>Tabs expand to two spaces; new splits open below or to the right.</li>
+        <li>Search ignores case unless the query contains uppercase letters.</li>
+        <li>The system clipboard is used for normal copy and paste.</li>
+        <li>Trailing whitespace is removed and missing parent directories are created when a file is saved.</li>
+        <li>Markdown and Git commit buffers enable wrapping and spell checking.</li>
+        <li>Format-on-save is disabled; formatting is an explicit action.</li>
+      </ul>
+
+      <footer>
+        Continue with the <a href="keybindings.html">keybinding reference</a>.
+      </footer>
+    </main>
+  </body>
+</html>

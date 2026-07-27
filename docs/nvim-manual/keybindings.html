@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Keybindings for Gota Morishita's Neovim configuration">
+    <title>Neovim Manual · Keybindings</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <header>
+      <div class="topbar">
+        <a class="brand" href="index.html">Neovim Manual</a>
+        <nav aria-label="Manual">
+          <a href="index.html">Overview</a>
+          <a href="keybindings.html" aria-current="page">Keybindings</a>
+          <a href="languages.html">Languages</a>
+          <a href="troubleshooting.html">Troubleshooting</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="eyebrow">Reference</div>
+        <h1>Keybindings</h1>
+        <p class="lede">
+          <kbd>Leader</kbd> means <kbd>Space</kbd>. Press Space and pause to
+          let Which-key show available groups.
+        </p>
+      </section>
+
+      <h2>Files, search, and Git</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Keys</th><th>Mode</th><th>Action</th></tr></thead>
+          <tbody>
+            <tr><td><kbd>Space</kbd> <kbd>e</kbd></td><td>Normal</td><td>Toggle Neo-tree.</td></tr>
+            <tr><td><kbd>Space</kbd> <kbd>Space</kbd></td><td>Normal</td><td>Smart file search.</td></tr>
+            <tr><td><kbd>Space</kbd> <kbd>/</kbd></td><td>Normal</td><td>Search text in the project.</td></tr>
+            <tr><td><kbd>Space</kbd> <kbd>,</kbd></td><td>Normal</td><td>Search open buffers.</td></tr>
+            <tr><td><kbd>Space</kbd> <kbd>f</kbd> <kbd>r</kbd></td><td>Normal</td><td>Open a recent file.</td></tr>
+            <tr><td><kbd>Space</kbd> <kbd>g</kbd> <kbd>s</kbd></td><td>Normal</td><td>Search changed Git files.</td></tr>
+            <tr><td><kbd>Space</kbd> <kbd>g</kbd> <kbd>l</kbd></td><td>Normal</td><td>Browse the Git log.</td></tr>
+            <tr><td><kbd>Space</kbd> <kbd>u</kbd> <kbd>n</kbd></td><td>Normal</td><td>Dismiss notifications.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Inside Neo-tree</h3>
+      <p>
+        Use <kbd>l</kbd> to open a file or directory and <kbd>h</kbd> to close
+        a directory. Standard Neo-tree mappings such as <kbd>a</kbd> for add,
+        <kbd>d</kbd> for delete, <kbd>r</kbd> for rename, and <kbd>?</kbd> for
+        help remain available.
+      </p>
+
+      <h2>LSP and diagnostics</h2>
+      <p>These buffer-local mappings appear when a language server attaches.</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Keys</th><th>Mode</th><th>Action</th></tr></thead>
+          <tbody>
+            <tr><td><kbd>gd</kbd></td><td>Normal</td><td>Find definitions.</td></tr>
+            <tr><td><kbd>gD</kbd></td><td>Normal</td><td>Go to declaration.</td></tr>
+            <tr><td><kbd>gr</kbd></td><td>Normal</td><td>Find references.</td></tr>
+            <tr><td><kbd>gi</kbd></td><td>Normal</td><td>Find implementations.</td></tr>
+            <tr><td><kbd>gt</kbd></td><td>Normal</td><td>Find type definitions.</td></tr>
+            <tr><td><kbd>K</kbd></td><td>Normal</td><td>Show documentation under the cursor.</td></tr>
+            <tr><td><kbd>Space</kbd> <kbd>c</kbd> <kbd>a</kbd></td><td>Normal / Visual</td><td>Show code actions.</td></tr>
+            <tr><td><kbd>Space</kbd> <kbd>l</kbd> <kbd>r</kbd></td><td>Normal</td><td>Rename the symbol under the cursor.</td></tr>
+            <tr><td><kbd>Space</kbd> <kbd>D</kbd></td><td>Normal</td><td>Search all diagnostics in the buffer.</td></tr>
+            <tr><td><kbd>gl</kbd></td><td>Normal</td><td>Show the diagnostic on the current line.</td></tr>
+            <tr><td><kbd>Space</kbd> <kbd>d</kbd> <kbd>j</kbd></td><td>Normal</td><td>Jump to the next diagnostic.</td></tr>
+            <tr><td><kbd>Space</kbd> <kbd>d</kbd> <kbd>k</kbd></td><td>Normal</td><td>Jump to the previous diagnostic.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>Editing</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Keys</th><th>Mode</th><th>Action</th></tr></thead>
+          <tbody>
+            <tr><td><kbd>Space</kbd> <kbd>l</kbd> <kbd>f</kbd></td><td>Normal / Visual</td><td>Format the file or selected range.</td></tr>
+            <tr><td><kbd>Space</kbd> <kbd>l</kbd> <kbd>l</kbd></td><td>Normal</td><td>Run the configured linter.</td></tr>
+            <tr><td><kbd>gcc</kbd></td><td>Normal</td><td>Toggle a line comment.</td></tr>
+            <tr><td><kbd>gc</kbd> + motion</td><td>Normal / Visual</td><td>Toggle line comments over a motion or selection.</td></tr>
+            <tr><td><kbd>gbc</kbd></td><td>Normal</td><td>Toggle a block comment.</td></tr>
+            <tr><td><kbd>gco</kbd> / <kbd>gcO</kbd></td><td>Normal</td><td>Add a commented line below / above.</td></tr>
+            <tr><td><kbd>&lt;</kbd> / <kbd>&gt;</kbd></td><td>Visual</td><td>Indent and keep the selection active.</td></tr>
+            <tr><td><kbd>p</kbd></td><td>Visual</td><td>Paste without replacing the yank register.</td></tr>
+            <tr><td><kbd>x</kbd></td><td>Normal</td><td>Delete a character without replacing the yank register.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>Windows, tabs, and movement</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Keys</th><th>Action</th></tr></thead>
+          <tbody>
+            <tr><td><kbd>Option</kbd> + <kbd>h/j/k/l</kbd></td><td>Move between windows.</td></tr>
+            <tr><td><kbd>Option</kbd> + <kbd>Tab</kbd></td><td>Switch to the alternate buffer.</td></tr>
+            <tr><td><kbd>Shift</kbd> + <kbd>Tab</kbd></td><td>Open the current file in a new tab.</td></tr>
+            <tr><td><kbd>Shift</kbd> + <kbd>h</kbd> / <kbd>l</kbd></td><td>Previous / next tab.</td></tr>
+            <tr><td><kbd>Ctrl</kbd> + <kbd>j</kbd> / <kbd>k</kbd></td><td>Smooth half-page scroll down / up.</td></tr>
+            <tr><td><kbd>j</kbd> / <kbd>k</kbd></td><td>Move by displayed lines when text wraps.</td></tr>
+            <tr><td><kbd>n</kbd> / <kbd>N</kbd></td><td>Next / previous search result, centered.</td></tr>
+            <tr><td><kbd>Ctrl</kbd> + <kbd>;</kbd></td><td>Leave terminal mode.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>Completion</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Keys</th><th>Action</th></tr></thead>
+          <tbody>
+            <tr><td><kbd>Ctrl</kbd> + <kbd>j</kbd></td><td>Select the next completion item.</td></tr>
+            <tr><td><kbd>Ctrl</kbd> + <kbd>k</kbd></td><td>Select the previous completion item.</td></tr>
+            <tr><td><kbd>Enter</kbd></td><td>Accept the selected completion item, otherwise insert a normal newline.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>Markdown, LaTeX, and CSV</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Keys or command</th><th>Action</th></tr></thead>
+          <tbody>
+            <tr><td><code>:Markview toggle</code></td><td>Toggle rendered Markdown.</td></tr>
+            <tr><td><kbd>\</kbd> <kbd>l</kbd> <kbd>l</kbd></td><td>Start or stop continuous LaTeX compilation.</td></tr>
+            <tr><td><kbd>\</kbd> <kbd>l</kbd> <kbd>v</kbd></td><td>Open the compiled PDF in Skim.</td></tr>
+            <tr><td><code>:CsvViewToggle</code></td><td>Toggle aligned CSV display.</td></tr>
+            <tr><td><kbd>Tab</kbd> / <kbd>Shift</kbd> + <kbd>Tab</kbd></td><td>Move to the next / previous CSV field.</td></tr>
+            <tr><td><kbd>Enter</kbd> / <kbd>Shift</kbd> + <kbd>Enter</kbd></td><td>Move to the next / previous CSV row.</td></tr>
+            <tr><td><kbd>if</kbd> / <kbd>af</kbd></td><td>Select inside / around a CSV field.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="note">
+        <p>
+          The backslash is VimTeX’s default local leader. Run
+          <code>:VimtexInfo</code> inside a <code>.tex</code> file to inspect
+          its active mappings and compiler.
+        </p>
+      </div>
+
+      <footer>
+        Continue with the <a href="languages.html">language-tool matrix</a>.
+      </footer>
+    </main>
+  </body>
+</html>

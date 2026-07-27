@@ -71,6 +71,8 @@ brew install --cask mactex-no-gui
 
 The Brewfile installs Skim as the PDF viewer. In a LaTeX buffer, use `\ll` to compile and `\lv` to open the PDF.
 
+See the browser-friendly [Neovim manual](docs/nvim-manual/index.html) for the complete setup guide, keybindings, language-tool matrix, and troubleshooting instructions.
+
 ## Verify
 
 ```bash
