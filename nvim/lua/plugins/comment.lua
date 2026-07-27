@@ -10,10 +10,6 @@ return {
 	},
 
 	config = function()
-		vim.keymap.set("n", "<leader>/", "<Plug>(comment_toggle_linewise_current)", { desc = "Comment" })
-		vim.keymap.set("x", "<leader>/", "<Plug>(comment_toggle_linewise_visual)", { desc = "Comment" })
-		vim.keymap.set("v", "<leader>/", "<Plug>(comment_toggle_linewise_visual)", { desc = "Comment" })
-
 		vim.g.skip_ts_context_commentstring_module = true
 		---@diagnostic disable: missing-fields
 		require("ts_context_commentstring").setup({
