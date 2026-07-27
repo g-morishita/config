@@ -2,74 +2,62 @@
 
 This repo currently manages:
 
-- `starship` via [starship.toml](/Users/morishitag/.config/starship.toml)
-- `nvim` via [nvim/init.lua](/Users/morishitag/.config/nvim/init.lua)
+- `starship` via [starship.toml](starship.toml)
+- `nvim` via [nvim/init.lua](nvim/init.lua)
+- `zsh` via [zsh/.zshrc](zsh/.zshrc)
+- iTerm2 via the dynamic profile in [iterm2/g-morishita.json](iterm2/g-morishita.json)
+- terminal dependencies via [Brewfile](Brewfile)
 
 ## Requirements
 
 - `git`
+- `Homebrew` (for package installation)
 - `starship`
 - `nvim` `0.11+`
 - a Nerd Font in your terminal
 
-For full Neovim LSP support, make sure these executables are on `PATH` because they are enabled in [nvim/lua/config/lsp.lua](/Users/morishitag/.config/nvim/lua/config/lsp.lua):
+For full Neovim LSP support, make sure these executables are on `PATH` because they are enabled in [nvim/lua/config/lsp.lua](nvim/lua/config/lsp.lua):
 
 - `lua-language-server`
 - `basedpyright-langserver`
 - `stan-language-server`
 
-## Install Into `~/.config`
+## Install
 
-If you want this repo to be your live config directory:
-
-```bash
-git clone <repo-url> ~/.config
-cd ~/.config
-```
-
-If the repo lives somewhere else, link only the managed entries:
+Clone the repository, then run the installer:
 
 ```bash
-mkdir -p ~/.config
-ln -sfn /path/to/repo/starship.toml ~/.config/starship.toml
-ln -sfn /path/to/repo/nvim ~/.config/nvim
+git clone git@github.com:g-morishita/config.git ~/config
+cd ~/config
+./scripts/install.sh --packages
 ```
 
-## Initialize `starship`
-
-Install it first:
+Omit `--packages` when the Homebrew dependencies are already installed:
 
 ```bash
-brew install starship
+./scripts/install.sh
 ```
 
-Enable it in `zsh` by adding this to `~/.zshrc`:
+The installer links the managed Starship, Neovim, Zsh, and iTerm2 files into their expected locations. Existing files are moved to timestamped backups before linking.
 
-```bash
-eval "$(starship init zsh)"
-```
+The iTerm2 profile is a [dynamic profile](https://iterm2.com/documentation-dynamic-profiles.html). After installation, select `g-morishita` in **iTerm2 → Settings → Profiles** and make it the default.
 
-Open a new shell and `starship` will load [starship.toml](/Users/morishitag/.config/starship.toml).
+## Shell features
 
-## Initialize `nvim`
+- shared, deduplicated command history
+- cached, case-insensitive native Zsh completion
+- Starship prompt with Git state, command duration, and time
+- `fzf` history and file search
+- `zoxide` smarter directory navigation
+- `eza` directory listings and `bat` file previews
+- compact Git and navigation aliases
 
-Install Neovim:
-
-```bash
-brew install neovim git
-```
-
-Then launch it once:
-
-```bash
-nvim
-```
-
-On first start, [nvim/lua/config/lazy.lua](/Users/morishitag/.config/nvim/lua/config/lazy.lua) bootstraps `lazy.nvim` automatically and installs the configured plugins. After that, restart `nvim` if needed.
+The aliases and optional tool initialization are guarded, so the shell still starts if an optional package is unavailable.
 
 ## Verify
 
 ```bash
-starship --version
-nvim --version
+./scripts/validate.sh
 ```
+
+On first launch, Neovim bootstraps `lazy.nvim` and installs the configured plugins. Restart Neovim afterward if needed.

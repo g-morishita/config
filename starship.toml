@@ -7,7 +7,7 @@ scan_timeout = 30
 palette = "tokyo_night"
 
 format = """
-$status$username$hostname$directory$git_branch$git_status$line_break$character
+$status$username$hostname$directory$git_branch$git_status$cmd_duration$time$line_break$character
 """
 
 [palettes.tokyo_night]
@@ -22,7 +22,7 @@ fg = "#c0caf5"
 muted = "#565f89"
 
 [username]
-show_always = true
+show_always = false
 style_user = "bold yellow"
 style_root = "bold red"
 format = "[󰣇 $user]($style) "
