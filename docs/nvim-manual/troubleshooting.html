@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Troubleshooting Gota Morishita's Neovim configuration">
+    <title>Neovim Manual · Troubleshooting</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <header>
+      <div class="topbar">
+        <a class="brand" href="index.html">Neovim Manual</a>
+        <nav aria-label="Manual">
+          <a href="index.html">Overview</a>
+          <a href="keybindings.html">Keybindings</a>
+          <a href="languages.html">Languages</a>
+          <a href="troubleshooting.html" aria-current="page">Troubleshooting</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="eyebrow">Diagnostics</div>
+        <h1>Troubleshooting</h1>
+        <p class="lede">
+          Start with the smallest relevant check. Most first-launch problems
+          come from a plugin that is still downloading or a missing system
+          runtime.
+        </p>
+      </section>
+
+      <h2>Quick health check</h2>
+      <pre><code>cd ~/config
+./scripts/validate.sh
+nvim
+
+# Then, inside Neovim:
+:checkhealth
+:Lazy
+:Mason</code></pre>
+
+      <div class="note">
+        <p>
+          After a large first installation, close and reopen Neovim once. This
+          lets newly installed parsers and language tools load in a clean
+          process.
+        </p>
+      </div>
+
+      <h2>Plugins do not finish installing</h2>
+      <ol>
+        <li>Open <code>:Lazy</code>.</li>
+        <li>Press <kbd>S</kbd> to sync the declared plugins.</li>
+        <li>Read the error for the individual failed plugin.</li>
+        <li>Check internet access and confirm <code>git --version</code> works.</li>
+        <li>Restart Neovim after the sync completes.</li>
+      </ol>
+
+      <h2>Language server does not attach</h2>
+      <ol>
+        <li>Run <code>:set filetype?</code> and confirm the detected language.</li>
+        <li>Run <code>:Mason</code> and confirm the matching server is installed.</li>
+        <li>Run <code>:LspInfo</code> and inspect the server’s root directory and command.</li>
+        <li>Open <code>:LspLog</code> if the process starts and immediately exits.</li>
+      </ol>
+
+      <h3>Node-based servers fail</h3>
+      <p>TypeScript, ESLint, HTML, CSS, JSON, Bash LS, and Prettier require Node:</p>
+      <pre><code>brew install node
+node --version</code></pre>
+
+      <h3>R server fails</h3>
+      <p>Install R, then reopen Neovim so Mason can complete the language-server installation:</p>
+      <pre><code>brew install r
+R --version</code></pre>
+
+      <h2>Formatting or linting does nothing</h2>
+      <ul>
+        <li>Run <code>:ConformInfo</code> to see the selected formatter and its executable.</li>
+        <li>Run <code>:Mason</code> to confirm Ruff, Air, Prettier, StyLua, shfmt, or ShellCheck is installed.</li>
+        <li>Formatting is not automatic. Press <kbd>Space</kbd> <kbd>l</kbd> <kbd>f</kbd>.</li>
+        <li>Zsh intentionally has no shfmt or ShellCheck integration.</li>
+      </ul>
+
+      <h2>LaTeX does not compile or open</h2>
+      <p>Check each layer separately:</p>
+      <pre><code>which latexmk
+which open
+
+# Install missing dependencies:
+brew install --cask mactex-no-gui
+brew install --cask skim</code></pre>
+      <p>
+        Inside a <code>.tex</code> file, run <code>:VimtexInfo</code>. Use
+        <kbd>\</kbd> <kbd>l</kbd> <kbd>l</kbd> to compile and
+        <kbd>\</kbd> <kbd>l</kbd> <kbd>v</kbd> to view.
+      </p>
+
+      <h2>Icons appear as question marks</h2>
+      <p>
+        Select <strong>MesloLGS Nerd Font</strong> in the active iTerm2
+        profile, then open a new terminal window. The Brewfile installs the
+        font, but iTerm2 still needs to use it for both ASCII and non-ASCII
+        characters.
+      </p>
+
+      <h2>Search does not find files</h2>
+      <pre><code>brew install fd ripgrep
+fd --version
+rg --version</code></pre>
+      <p>
+        Run Neovim from the project directory with <code>nvim .</code>. Snacks
+        uses the working directory as the default search scope.
+      </p>
+
+      <h2>CSV or Markdown view</h2>
+      <ul>
+        <li>Use <code>:CsvViewToggle</code> in a CSV file.</li>
+        <li>Use <code>:Markview toggle</code> to change Markdown rendering.</li>
+        <li>If a command is unknown, open <code>:Lazy</code> and confirm the plugin loaded successfully.</li>
+      </ul>
+
+      <h2>Update safely</h2>
+      <pre><code>cd ~/config
+git pull --ff-only
+brew bundle install
+./scripts/validate.sh</code></pre>
+      <p>
+        Open <code>:Lazy</code> and sync after pulling. Mason Tool Installer
+        will reconcile the declared language tools when Neovim starts.
+      </p>
+
+      <h2>Restore the previous configuration</h2>
+      <p>
+        The installer gives displaced files names such as
+        <code>~/.config/nvim.backup-YYYYMMDDHHMMSS</code>. To restore one,
+        first move the managed symlink out of the way, then rename the desired
+        backup to <code>~/.config/nvim</code>. Inspect the exact paths before
+        moving anything.
+      </p>
+
+      <footer>
+        Return to the <a href="index.html">manual overview</a>.
+      </footer>
+    </main>
+  </body>
+</html>

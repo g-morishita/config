@@ -4,7 +4,6 @@ return {
 		dependencies = {
 			"rafamadriz/friendly-snippets",
 			"onsails/lspkind.nvim",
-			"giuxtaposition/blink-cmp-copilot",
 		},
 
 		version = "1.*",
@@ -67,8 +66,6 @@ return {
 					Unit = " ",
 					Value = " ",
 					Variable = " ",
-					Codeium = "󰚩 ",
-					Copilot = " ",
 					LazyDev = "b ",
 				},
 			})
@@ -132,24 +129,8 @@ return {
 					documentation = { auto_show = true },
 				},
 				sources = {
-					-- default = { "codeium", "lazydev", "lsp", "path", "buffer" },
 					default = { "lazydev", "lsp", "path", "buffer" },
 					providers = {
-						copilot = {
-							name = "copilot",
-							module = "blink-cmp-copilot",
-							score_offset = 100,
-							async = true,
-							transform_items = function(_, items)
-								local CompletionItemKind = require("blink.cmp.types").CompletionItemKind
-								local kind_idx = #CompletionItemKind + 1
-								CompletionItemKind[kind_idx] = "Copilot"
-								for _, item in ipairs(items) do
-									item.kind = kind_idx
-								end
-								return items
-							end,
-						},
 						lazydev = {
 							name = "LazyDev",
 							module = "lazydev.integrations.blink",

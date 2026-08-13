@@ -9,7 +9,16 @@ zsh -n "$repo_root/scripts/install.sh"
 plutil -convert xml1 -o /dev/null -- "$repo_root/iterm2/g-morishita.json"
 
 if command -v starship >/dev/null 2>&1; then
-  STARSHIP_CONFIG="$repo_root/starship.toml" starship config >/dev/null
+  STARSHIP_CONFIG="$repo_root/starship.toml" starship print-config >/dev/null
 fi
 
-print "Terminal configuration is valid."
+if command -v nvim >/dev/null 2>&1; then
+  (
+    cd "$repo_root"
+    nvim --headless -u NONE \
+      "+lua for _, file in ipairs(vim.fn.glob('nvim/**/*.lua', false, true)) do assert(loadfile(file), file) end" \
+      "+qall!"
+  )
+fi
+
+print "Configuration is valid."

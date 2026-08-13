@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Language support in Gota Morishita's Neovim configuration">
+    <title>Neovim Manual · Languages</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <header>
+      <div class="topbar">
+        <a class="brand" href="index.html">Neovim Manual</a>
+        <nav aria-label="Manual">
+          <a href="index.html">Overview</a>
+          <a href="keybindings.html">Keybindings</a>
+          <a href="languages.html" aria-current="page">Languages</a>
+          <a href="troubleshooting.html">Troubleshooting</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="eyebrow">Tooling matrix</div>
+        <h1>Language support</h1>
+        <p class="lede">
+          Mason installs the configured language servers, formatters, and
+          linters. Treesitter supplies syntax parsing for the file types listed
+          here.
+        </p>
+      </section>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Language</th>
+              <th>Language server</th>
+              <th>Formatter</th>
+              <th>Linter</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Python</td><td>BasedPyright</td><td>Ruff</td><td>Ruff</td><td>Type checking, completion, formatting, and linting.</td></tr>
+            <tr><td>R</td><td>R languageserver</td><td>Air</td><td>—</td><td>Requires the Homebrew <code>r</code> formula.</td></tr>
+            <tr><td>Markdown</td><td>Marksman</td><td>Prettier</td><td>—</td><td>Markview renders the buffer; spell checking and wrapping are enabled.</td></tr>
+            <tr><td>LaTeX</td><td>TexLab</td><td>LSP fallback</td><td>—</td><td>VimTeX uses <code>latexmk</code> and opens PDFs with Skim.</td></tr>
+            <tr><td>Lua</td><td>Lua Language Server</td><td>StyLua</td><td>—</td><td>LazyDev adds Neovim API knowledge to completion.</td></tr>
+            <tr><td>Shell / Bash</td><td>Bash Language Server</td><td>shfmt</td><td>ShellCheck</td><td>Formatter uses two-space indentation.</td></tr>
+            <tr><td>Zsh</td><td>—</td><td>—</td><td>—</td><td>Syntax editing is available; shfmt and ShellCheck are intentionally not run because they target POSIX shell/Bash rather than Zsh.</td></tr>
+            <tr><td>JSON</td><td>JSON Language Server</td><td>Prettier</td><td>—</td><td>JSON Treesitter parsing is enabled.</td></tr>
+            <tr><td>JavaScript / TypeScript</td><td>TypeScript LS + ESLint</td><td>Prettier</td><td>ESLint via LSP</td><td>Includes JSX and TSX parsing.</td></tr>
+            <tr><td>Dockerfile</td><td>Docker Language Server</td><td>LSP fallback</td><td>—</td><td>Dockerfile Treesitter parsing is enabled.</td></tr>
+            <tr><td>Docker Compose</td><td>Docker Compose LS</td><td>Prettier for YAML</td><td>—</td><td>YAML Treesitter parsing is enabled.</td></tr>
+            <tr><td>HTML</td><td>HTML Language Server</td><td>Prettier</td><td>—</td><td>Matching tags close and rename automatically.</td></tr>
+            <tr><td>CSS</td><td>CSS Language Server</td><td>Prettier</td><td>—</td><td>Hex, RGB, and HSL colors are displayed inline.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>How tools are used</h2>
+      <div class="grid">
+        <article class="card">
+          <h3>LSP</h3>
+          <p>Starts automatically for a matching project and provides completion, definitions, references, diagnostics, rename, and code actions.</p>
+        </article>
+        <article class="card">
+          <h3>Formatting</h3>
+          <p>Run it explicitly with <kbd>Space</kbd> <kbd>l</kbd> <kbd>f</kbd>. If no dedicated formatter exists, Conform may use the attached LSP.</p>
+        </article>
+        <article class="card">
+          <h3>Linting</h3>
+          <p>Ruff and ShellCheck run after entering or saving a buffer and after leaving insert mode. Use <kbd>Space</kbd> <kbd>l</kbd> <kbd>l</kbd> to run manually.</p>
+        </article>
+        <article class="card">
+          <h3>Parsing</h3>
+          <p>Treesitter improves highlighting and structural understanding for Bash, CSS, Dockerfile, HTML, JavaScript, JSON, LaTeX, Lua, Markdown, Python, R, RNoweb, TSX, TypeScript, Vim, and YAML.</p>
+        </article>
+      </div>
+
+      <h2>System dependencies</h2>
+      <p>The repository’s Brewfile supplies:</p>
+      <pre><code>brew bundle install</code></pre>
+      <ul>
+        <li><code>node</code> for npm-based language servers and Prettier</li>
+        <li><code>r</code> for R and its language server</li>
+        <li><code>fd</code> and <code>ripgrep</code> for fast file and text search</li>
+        <li><code>skim</code> as the LaTeX PDF viewer</li>
+      </ul>
+
+      <p>A TeX distribution is intentionally separate because it is large:</p>
+      <pre><code>brew install --cask mactex-no-gui</code></pre>
+
+      <h2>Check the current buffer</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Command</th><th>What it answers</th></tr></thead>
+          <tbody>
+            <tr><td><code>:set filetype?</code></td><td>Which file type did Neovim detect?</td></tr>
+            <tr><td><code>:LspInfo</code></td><td>Which language server is attached?</td></tr>
+            <tr><td><code>:ConformInfo</code></td><td>Which formatter is available?</td></tr>
+            <tr><td><code>:Mason</code></td><td>Was the required external tool installed?</td></tr>
+            <tr><td><code>:InspectTree</code></td><td>Which Treesitter parser is active?</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <footer>
+        If a tool does not start, see <a href="troubleshooting.html">troubleshooting</a>.
+      </footer>
+    </main>
+  </body>
+</html>

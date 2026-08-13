@@ -8,7 +8,10 @@ local general = augroup("General", { clear = true })
 autocmd("BufWritePre", {
 	group = general,
 	pattern = "*",
-	callback = function()
+	callback = function(event)
+		if not vim.bo[event.buf].modifiable or vim.bo[event.buf].readonly then
+			return
+		end
 		local save_cursor = vim.fn.getpos(".")
 		vim.cmd([[%s/\s\+$//e]])
 		vim.fn.setpos(".", save_cursor)
@@ -66,7 +69,6 @@ autocmd({ "FileType" }, {
 		"help",
 		"man",
 		"lspinfo",
-		"oil",
 		"spectre_panel",
 		"lir",
 		"DressingSelect",
@@ -135,18 +137,4 @@ autocmd({ "CursorHold" }, {
 			vim.cmd([[silent! lua require("luasnip").unlink_current()]])
 		end
 	end,
-})
-
--- Window navigation in sidekick_terminal buffers
-autocmd({ "FileType" }, {
-	pattern = "sidekick_terminal",
-	callback = function()
-		local opts = { buffer = true, noremap = true, silent = true }
-		vim.keymap.set("t", "<m-h>", "<C-\\><C-n><C-w>h", opts)
-		vim.keymap.set("t", "<m-j>", "<C-\\><C-n><C-w>j", opts)
-		vim.keymap.set("t", "<m-k>", "<C-\\><C-n><C-w>k", opts)
-		vim.keymap.set("t", "<m-l>", "<C-\\><C-n><C-w>l", opts)
-		-- vim.keymap.set("t", "<Esc>", "<Nop>", opts)
-	end,
-	desc = "Window navigation in sidekick terminal",
 })
